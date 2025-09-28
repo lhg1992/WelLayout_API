@@ -33,6 +33,8 @@ def input2json (n, # number of wells
                 VKM, # shape:(n, 3)
                 DLSM, # shape:(n, 2) or (n, 3), dogleg for [KOP, Control(optional), Target] 
                 rM= None, # curvature radius, corresponding to dogleg, overwrites DLSM if provided.
+                ObjM=None, # objective(cost) function, default is the length of well trajectory
+                        # shape (n, 1) string objects.
 
                 tag= None, # a list of strings for well names
 
@@ -43,8 +45,10 @@ def input2json (n, # number of wells
                 cst_radiusM= None, # shape (n, )
                 
                 # other constraints
-                necon= None,
-                lay_con= None,
+                neconM= None,
+                lay_conM= None,
+
+                
 
                 # K-sites parameters
                 cst_Site= None,
@@ -119,7 +123,7 @@ def input2json (n, # number of wells
                 "DLSM":
                 {
                     "DESCRIPTION": "dogleg severity",
-                    "UNIT":"deg/30m",
+                    "UNIT":"°/30m",
                     "VALUE":DLSM
                     # {
                     #     int(WellNo[i]): DLSM[i,:] for i in range(n)
@@ -134,6 +138,13 @@ def input2json (n, # number of wells
                     # {
                     #     int(WellNo[i]): rM[i,:] for i in range(n)
                     #     }
+                },
+
+                "ObjM":
+                {
+                    "DESCRIPTION": "objective(cost) function, default is the length of well trajectory",
+                    "UNIT": "",
+                    "VALUE": ObjM
                 },
 
                 "MD_intervalM":
@@ -172,26 +183,26 @@ def input2json (n, # number of wells
                 "cst_radiusM":
                 {
                     "DESCRIPTION": "radius for computing cost contour",
-                    "UNIT":"m",
+                    "UNIT":"",
                     "VALUE":cst_radiusM
                     # {
                     #     int(WellNo[i]): cst_radiusM[i,:] for i in range(n)
                     #     }
                 },
 
-                "necon":
+                "neconM":
                 {
                     "DESCRIPTION": "non-equal constraints",
                     "UNIT":"",
-                    "VALUE": necon
+                    "VALUE": neconM
 
                 },
 
-                "lay_con":
+                "lay_conM":
                 {
                     "DESCRIPTION": "formation constraints in special layer(s)",
                     "UNIT":"",
-                    "VALUE": lay_con
+                    "VALUE": lay_conM
                 },
 
                 "cst_Site":
