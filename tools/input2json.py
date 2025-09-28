@@ -32,9 +32,8 @@ def input2json (n, # number of wells
                 PKM, # shape:(n, 3)
                 VKM, # shape:(n, 3)
                 DLSM, # shape:(n, 2) or (n, 3), dogleg for [KOP, Control(optional), Target] 
+                rM= None, # curvature radius, corresponding to dogleg, overwrites DLSM if provided.
 
-                rM= None, # curvature radius, corresponding to dogleg
-                WellNo= None, # a list of well index, start from 1
                 tag= None, # a list of strings for well names
 
                 MD_intervalM= None, # shape (n, )
@@ -65,14 +64,6 @@ def input2json (n, # number of wells
                     "DESCRIPTION": "number of wells",
                     "UNIT":"",
                     "VALUE": int(n)
-
-                },
-                
-                "WellNo":
-                {
-                    "DESCRIPTION": "well index",
-                    "UNIT":"",
-                    "VALUE": WellNo
 
                 },
 
