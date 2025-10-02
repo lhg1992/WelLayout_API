@@ -38,6 +38,7 @@ def input2json (n, # number of wells
 
                 tag= None, # a list of strings for well names
 
+                # computation settings
                 MD_intervalM= None, # shape (n, )
                 XRange= None, # shape (2, )
                 YRange= None, # shape (2, )
@@ -48,8 +49,6 @@ def input2json (n, # number of wells
                 neconM= None,
                 lay_conM= None,
 
-                
-
                 # K-sites parameters
                 cst_Site= None,
                 slot= None,
@@ -57,6 +56,7 @@ def input2json (n, # number of wells
                 cluster_min= None,
                 cluster_max= None,
 
+                # file path for saving Json
                 filepath = "input.json",
                ):
     
@@ -147,6 +147,23 @@ def input2json (n, # number of wells
                     "VALUE": ObjM
                 },
 
+                "neconM":
+                {
+                    "DESCRIPTION": "non-equal constraints",
+                    "UNIT":"",
+                    "VALUE": neconM
+
+                },
+
+                "lay_conM":
+                {
+                    "DESCRIPTION": "formation constraints in special layer(s)",
+                    "UNIT":"",
+                    "VALUE": lay_conM
+                },
+
+                ## -----------------------------------------------------------------
+                # parameters for computation setting
                 "MD_intervalM":
                 {   
                     "DESCRIPTION": "measured depth interval in output data of well trajectory",
@@ -190,21 +207,8 @@ def input2json (n, # number of wells
                     #     }
                 },
 
-                "neconM":
-                {
-                    "DESCRIPTION": "non-equal constraints",
-                    "UNIT":"",
-                    "VALUE": neconM
-
-                },
-
-                "lay_conM":
-                {
-                    "DESCRIPTION": "formation constraints in special layer(s)",
-                    "UNIT":"",
-                    "VALUE": lay_conM
-                },
-
+                ## ----------------------------------------------
+                # K-sites paramters
                 "cst_Site":
                 {
                     "DESCRIPTION": "drill site preparation cost",
