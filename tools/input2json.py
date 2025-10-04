@@ -267,4 +267,6 @@ def input2json (n, # number of wells
         print("======Error in opening file========")
         print(str(e))
 
-    return out_json
+    # convert the str to dict
+    return json.loads(out_json)
+    

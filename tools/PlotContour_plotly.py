@@ -70,8 +70,8 @@ def PlotContour_plotly(X,Y,Contour_Val,
     mask = np.isnan(Contour_Val) # mask for NaN values
     Z[mask]=np.nan  # apply mask to Z
 
-    # %% go.Surface方法
-    # # bug众多：无法绘制突出形状；hovertemplate无效果
+    # %% go.Surface
+    # # bugs：can't show irregular shape；hovertemplate no effect
     # fig.add_trace( go.Surface(
     #     x=X.round(2), 
     #     y=Y.round(2), 
@@ -112,7 +112,7 @@ def PlotContour_plotly(X,Y,Contour_Val,
     #     )
     # )
 
-    # %% go.Mesh3d方法
+    # %% go.Mesh3d
     mesh_data=surface2mesh3d(X, Y, Z, C=Contour_Val)
     fig.add_trace( go.Mesh3d(
             x=mesh_data['x'],
@@ -138,10 +138,10 @@ def PlotContour_plotly(X,Y,Contour_Val,
 
             hovertemplate= name + "<br>x: %{x:.2f}<br>y: %{y:.2f}<br>cost: %{intensity:.2f}<br><extra></extra>",
             hoverlabel=dict(
-                bgcolor="lightyellow",   # 背景颜色
-                font_size=14,            # 字体大小
-                font_family="Arial",     # 字体
-                font_color="black"       # 字体颜色（Plotly v5.15+ 支持）
+                bgcolor="lightyellow",   
+                font_size=14,            
+                font_family="Arial",     
+                font_color="black"       
             )
         )
     )
@@ -281,6 +281,59 @@ def PlotContours_plotly(X, Y, Contour_ValM,
 #################################################################
 #################################################################
 # %%
+def PlotDangerArea(X,Y,Z,        
+                fig=None,
+                Color='red'):
+    """
+    X, Y: 2D meshgrid 
+    x = np.arange(0, 3000, 50)
+    y = np.arange(0, 3000, 50)
+    X, Y = np.meshgrid(x, y)
+
+    """
+    if fig is None:
+        fig = go.Figure()
+   
+   # format to Mesh3d
+    mesh_data=surface2mesh3d(X, Y, Z, C=Z, dense=4)
+
+    # 创建 Mesh3d 图形
+    fig.add_trace(go.Mesh3d(
+            x=mesh_data['x'],
+            y=mesh_data['y'],
+            z=mesh_data['z'],
+            i=mesh_data['i'],
+            j=mesh_data['j'],
+            k=mesh_data['k'],
+            name="danger zone",
+            color=Color, # 固定颜色
+            showlegend=True,
+            opacity=0.8,
+            hovertemplate= "danger zone" + "<br>x: %{x:.2f}<br>y: %{y:.2f}<br><extra></extra>", 
+            )
+    )
+
+    fig.update_layout(
+        scene=dict(
+            xaxis_title='X',
+            yaxis_title='Y',
+            zaxis_title='Z',
+        ),
+        # title='Mesh3d from Surface Grid',
+        width=600,
+        height=500,
+    )
+
+    fig.show()
+
+    return fig
+
+
+
+
+#################################################################
+#################################################################
+# %%
 import numpy as np
 from scipy.interpolate import griddata
 def surface2mesh3d(X, Y, Z, C=None, dense=1):
@@ -303,6 +356,8 @@ def surface2mesh3d(X, Y, Z, C=None, dense=1):
             intensity: color at each node
     """
     import numpy as np
+    if C is None:
+        C = Z
 
     if dense>1: #加密效果不好，最好不用
         # 恢复原始x, y

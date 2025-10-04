@@ -77,7 +77,7 @@ def PlotSurvey_plotly(survey,
     if type(survey) == np.ndarray:
         # define mouse hover interaction
         hovertemplate = name + "<br>East: %{x:.2f}<br>North: %{y:.2f}<br>Depth: %{z:.2f}" + \
-            "<extra><br>MD: %{customdata[0]:.2f}"
+            "<extra>MD: %{customdata[0]:.2f}"
         
         if survey.shape[1] >= 5: 
             hovertemplate += "<br>Inclination: %{customdata[1]:.2f}°" 
