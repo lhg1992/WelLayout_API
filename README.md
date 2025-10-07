@@ -20,7 +20,7 @@ __Open the *.ipynb to see the examples of using WelLayout API.__
 Here shows some examples of the optimization results:  
 Single well trajectory under various constraints:
 ![image](./Demos/get_1well/ex1/figure.png)
-[click me for interactive 3D visualization](./Demos/get_1well/ex1/figure.html)
+<a href="./Demos/get_1well/ex1/figure.html" target="_blank">click me</a>
 
 1-site-N-wells (site-level layout) under various constraints:
 ![image](./Demos/get_1site/ex1/figure.png)
