@@ -15,7 +15,7 @@ There is still more work to be done with the support from industrial partners.
 
 
 =========================================================  
-__Open the *.ipynb to see the examples of using WelLayout API.__
+__Run the \*.ipynb under /Demos/... to see the examples of using WelLayout API.__
 
 Here shows some examples of the optimization results:  
 Single well trajectory under various constraints:  
