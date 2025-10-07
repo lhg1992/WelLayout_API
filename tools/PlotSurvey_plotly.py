@@ -14,7 +14,7 @@ import plotly.graph_objects as plt
 import numpy as np
 import pandas as pd
 
-def PlotSurvey_plotly(survey, 
+def PlotSurvey(survey, 
                     fig=None,
                     name= None, # name of the trajectory in the plot
                     style='k-', # line style for the trajectory

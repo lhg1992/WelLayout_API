@@ -98,8 +98,8 @@ def APIhandler(url, # API server url
             if index is None:
                 pass # automatically computes the 1st well (index=0)
             elif isinstance(index, int):
-                if (index<0) or index>=input_data["FIELDOPT INPUT BLOCK"]["n"]:
-                    print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']}]")
+                if (index<0) or index>=input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']:
+                    print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']}]")
                     return None
                 # add parameters for computing the specified well
                 input_data["other"]={"index":index}
@@ -116,8 +116,8 @@ def APIhandler(url, # API server url
                     if not isinstance(ind, int):
                         print(f"index must be an integer")
                         return None
-                    if (ind<0) or ind>=input_data["FIELDOPT INPUT BLOCK"]["n"]:
-                        print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']}]")
+                    if (ind<0) or ind>=input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']:
+                        print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']}]")
                         return None
                 # add parameters for computing the specified wells
                 input_data["other"]={"indices":indices}
@@ -134,8 +134,8 @@ def APIhandler(url, # API server url
                     if not isinstance(ind, int):
                         print(f"index must be an integer")
                         return None
-                    if (ind<0) or ind>=input_data["FIELDOPT INPUT BLOCK"]["n"]:
-                        print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']}]")
+                    if (ind<0) or ind>=input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']:
+                        print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']}]")
                         return None
                 input_data["other"]={"indices":indices}
             else:

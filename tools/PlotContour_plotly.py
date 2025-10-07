@@ -15,7 +15,7 @@ show: if show==1, show the figure right now
 import plotly.graph_objects as go
 import numpy as np
 
-def PlotContour_plotly(X,Y,Contour_Val, 
+def PlotContour(X,Y,Contour_Val, 
                 fig=None,
                 name= None,
                 width=600, height=450, # fig size
@@ -224,7 +224,7 @@ def PlotContour_plotly(X,Y,Contour_Val,
 #################################################################
 #################################################################
 # %%
-def PlotContours_plotly(X, Y, Contour_ValM,
+def PlotContours(X, Y, Contour_ValM,
                         fig=None,
                         name_list= None,
 
@@ -255,7 +255,7 @@ def PlotContours_plotly(X, Y, Contour_ValM,
         cmax = np.nanmax(Contour_ValM)
 
     for i in range(num_contour):
-        fig=PlotContour_plotly(X,Y,Contour_ValM[i,:,:], 
+        fig=PlotContour(X,Y,Contour_ValM[i,:,:], 
                 fig=fig,
                 name= name_list[i],
 
