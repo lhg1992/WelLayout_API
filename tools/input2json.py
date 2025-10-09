@@ -49,6 +49,9 @@ def input2json (n, # number of wells
                 neconM= None,
                 lay_conM= None,
 
+                # anticollision constraint
+                anticol_con= None,
+
                 # K-sites parameters
                 cst_Site= None,
                 slot= None,
@@ -161,7 +164,28 @@ def input2json (n, # number of wells
                     "UNIT":"",
                     "VALUE": lay_conM
                 },
-
+                "anticol_con": {
+                    "Nodes_offset_list": {
+                        "DESCRIPTION": "a list of ?x4 arraies. Each array is the nodes for one offset trajectory. [x,y,z, MD]",
+                        "VALUE": anticol_con['Nodes_offset_list'] if anticol_con is not None else None
+                        },
+                    "safeDist_offset_f_list": {
+                        "DESCRIPTION":  "a list of strings. Each string is a function expression to define the safe distance for the corresponding off well.",
+                        "VALUE": anticol_con['safeDist_offset_f_list'] if anticol_con is not None else None
+                        },
+                    "safeDist_new_f_list": {
+                        "DESCRIPTION": "a list of strings. Each string is a function expression to define the safe distance for the new well.",
+                        "VALUE": anticol_con['safeDist_new_f_list'] if anticol_con is not None else None
+                        },
+                    "opt_factor_list": {
+                        "DESCRIPTION": "a list of scalars (float). Each scalar is the opt_factor for the corresponding off well.",
+                        "VALUE":anticol_con['opt_factor_list'] if anticol_con is not None else None
+                        },
+                    "SF_list": {
+                        "DESCRIPTION": "a list of scalars (float). Each scalar is the safety factor for the corresponding off well.",
+                        "VALUE": anticol_con['SF_list'] if anticol_con is not None else None
+                        }
+                },
                 ## -----------------------------------------------------------------
                 # parameters for computation setting
                 "MD_intervalM":

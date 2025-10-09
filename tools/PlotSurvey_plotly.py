@@ -122,28 +122,32 @@ def PlotSurvey(survey,
     # Ensure equal aspect ratio for X and Y axes
     F_x = survey[:, 0]
     F_y = survey[:, 1]
+    x_range = max(F_x)-min(F_x)
+    y_range = max(F_y)-min(F_y)
     if fig.layout.scene.xaxis.range is None: # for new fig
         x_limits = [min(F_x), max(F_x)]
     else: # for existing fig
-        x_limits = [min(min(F_x), min(fig.layout.scene.xaxis.range)), 
-                    max(max(F_x), max(fig.layout.scene.xaxis.range))]
+        x_limits = [min(min(F_x)-0.1*x_range, min(fig.layout.scene.xaxis.range)), 
+                    max(max(F_x)+0.1*x_range, max(fig.layout.scene.xaxis.range))]
 
     if fig.layout.scene.yaxis.range is None: # for new fig
         y_limits = [min(F_y), max(F_y)]
     else: # for existing fig
-        y_limits = [min(min(F_y), min(fig.layout.scene.yaxis.range)), 
-                    max(max(F_y), max(fig.layout.scene.yaxis.range))]
+        y_limits = [min(min(F_y)-0.1*y_range, min(fig.layout.scene.yaxis.range)), 
+                    max(max(F_y)+0.1*y_range, max(fig.layout.scene.yaxis.range))]
         
-    max_range = max(x_limits[1] - x_limits[0], y_limits[1] - y_limits[0])
-    mid_x = (x_limits[0] + x_limits[1]) / 2
-    mid_y = (y_limits[0] + y_limits[1]) / 2
-    x_range= [mid_x - max_range / 2, mid_x + max_range / 2]
-    y_range= [mid_y - max_range / 2, mid_y + max_range / 2]
+    
+    x_ratio=float((x_limits[1]-x_limits[0])/(y_limits[1]-y_limits[0]))
     fig.update_layout(
-        scene = dict(xaxis=dict(range=x_range,), # Set range for X axis
-                    yaxis=dict(range=y_range,), # Set range for Y axis
+        scene = dict(
+                xaxis=dict(range=x_limits), # Set range for X axis
+                yaxis=dict(range=y_limits), # Set range for Y axis
+                aspectmode="manual",
+                aspectratio=dict(x=x_ratio, y=1)  # X:Y:Z = 1:1:?
+                # aspectmode='data'
                 ),
         )
+
 
     # customize legend
     fig.update_layout(

@@ -20,8 +20,12 @@ __Run the \*.ipynb under /Demos/... to see the examples of using WelLayout API._
 Here shows some examples of the optimization results:  
 Single well trajectory under various constraints:  
 (click the figure for interactive 3D visualization)
-[![get_1well plotly figure](./Demos/get_1well/ex1/figure.png)](https://lhg1992.github.io/WelLayout_API/figure_1well_ex1.html)
+[![get_1well_ex1 plotly figure](./Demos/get_1well/ex1/figure.png)](https://lhg1992.github.io/WelLayout_API/figure_1well_ex1.html)
+
+Anticollision:
+(click the figure for interactive 3D visualization)
+[![get_1well_ex2 plotly figure](./Demos/get_1well/ex2/figure.png)](https://lhg1992.github.io/WelLayout_API/figure_1well_ex2.html)
 
 1-site-N-wells (site-level layout) under various constraints:  
 (click the figure for interactive 3D visualization)
-[![get_1site plotly figure](./Demos/get_1site/ex1/figure.png)](https://lhg1992.github.io/WelLayout_API/figure_1site_ex1.html)
+[![get_1site_ex1 plotly figure](./Demos/get_1site/ex1/figure.png)](https://lhg1992.github.io/WelLayout_API/figure_1site_ex1.html)

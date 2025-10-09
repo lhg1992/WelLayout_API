@@ -15,6 +15,8 @@ url_ksites = "https://home-test.make234.com/api/v1/get_ksites"
 # =======================================================================
 def get_1well(input_data, # formatted json data
             index=None,
+            getContour=0,
+
             filepath='output.json', # filepath to save response content
             show=0, # show full response
             
@@ -24,6 +26,7 @@ def get_1well(input_data, # formatted json data
      return APIhandler(url, # API server url
                 input_data, # formatted json data
                 index=index,
+                getContour=getContour,
 
                 filepath=filepath, # filepath to save response content
                 show=show, # show full response
@@ -34,6 +37,7 @@ def get_1well(input_data, # formatted json data
 # *********************************************************************
 def get_1site(input_data, # formatted json data
               indices=None, # indices of wells to be extracted from response
+              getContours=0,
               
             filepath='output.json', # filepath to save response content
             show=0, # show full response
@@ -45,6 +49,7 @@ def get_1site(input_data, # formatted json data
     return APIhandler(url, # API server url
                 input_data, # formatted json data
                 indices=indices,
+                getContours=getContours,
 
                 filepath=filepath, # filepath to save response content
                 show=show, # show full response
@@ -54,6 +59,8 @@ def get_1site(input_data, # formatted json data
 # ***********************************************************************
 def get_ksites(input_data, # formatted json data
               indices=None, # indices of wells to be extracted from response
+              getContours=0,
+
             filepath='output.json', # filepath to save response content
             show=0, # show full response
 
@@ -64,7 +71,8 @@ def get_ksites(input_data, # formatted json data
     return APIhandler(url, # API server url
                 input_data, # formatted json data
                 indices=indices,
-                
+                getContours=getContours,
+
                 filepath=filepath, # filepath to save response content
                 show=show, # show full response
                 timeout=timeout,
@@ -79,7 +87,10 @@ def get_ksites(input_data, # formatted json data
 def APIhandler(url, # API server url
             input_data, # formatted json data
             index=None, # index of well for 1well
+            getContour=0, # whether to get the cost contour of the well
+
             indices=None, # indices of wells for 1site & ksites
+            getContours=0, # whether to get the cost contours of each well
 
             filepath='output.json', # filepath to save response content
             show=0, # show full response
@@ -95,22 +106,24 @@ def APIhandler(url, # API server url
     try:
         # if the last word of url is "get_1well"
         if url.split("/")[-1]=="get_1well":
-            if index is None:
-                pass # automatically computes the 1st well (index=0)
+            if index is None: # automatically computes the 1st well (index=0)
+                input_data["other"]={"getContour":getContour}
+                pass 
             elif isinstance(index, int):
                 if (index<0) or index>=input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']:
                     print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']}]")
                     return None
                 # add parameters for computing the specified well
-                input_data["other"]={"index":index}
+                input_data["other"]={"index":index, "getContour":getContour}
             else:
                 print("index must be an integer or unspecified(None)")
                 return None
             response = requests.post(url, json=input_data, headers=headers, timeout=timeout)
 
         elif url.split("/")[-1]=="get_1site":
-            if indices is None:
-                pass # automatically computes all well as 1-site problem
+            if indices is None: # automatically computes all well as 1-site problem
+                input_data["other"]={"getContours":getContours}
+                pass 
             elif isinstance(indices, list):
                 for ind in indices:
                     if not isinstance(ind, int):
@@ -120,15 +133,16 @@ def APIhandler(url, # API server url
                         print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']}]")
                         return None
                 # add parameters for computing the specified wells
-                input_data["other"]={"indices":indices}
+                input_data["other"]={"indices":indices, "getContours":getContours}
             else:
                 print("indices must be a list of integers or unspecified(None)")
                 return None
             response = requests.post(url, json=input_data, headers=headers, timeout=timeout)
 
         elif url.split("/")[-1]=="get_ksites":
-            if indices is None:
-                pass # automatically computes all well as k-sites problem
+            if indices is None: # automatically computes all well as k-sites problem
+                input_data["other"]={"getContours":getContours}
+                pass 
             elif isinstance(indices, list):
                 for ind in indices:
                     if not isinstance(ind, int):
@@ -137,7 +151,8 @@ def APIhandler(url, # API server url
                     if (ind<0) or ind>=input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']:
                         print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']}]")
                         return None
-                input_data["other"]={"indices":indices}
+                # add parameters for computing the specified wells
+                input_data["other"]={"indices":indices, "getContours":getContours}
             else:
                 print("indices must be a list of integers or unspecified(None)")
                 return None
