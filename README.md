@@ -23,7 +23,7 @@ Here shows some examples of the optimization results, **click the figures for in
 Avoiding dangerous area in the formation (at a specific depth): /Demos/get_1well/1well_ex1.ipynb   
 [![get_1well_ex1 plotly figure](./Demos/get_1well/ex1/figure.png)](https://lhg1992.github.io/WelLayout_API/figure_1well_ex1.html)
 
-Anticollision with user-defined safety distance functions: /Demos/get_1well/1well_ex2.ipynb   
+Anticollision with safety distance functions related to measured depth: /Demos/get_1well/1well_ex2.ipynb   
 [![get_1well_ex2 plotly figure](./Demos/get_1well/ex2/figure.png)](https://lhg1992.github.io/WelLayout_API/figure_1well_ex2.html)
 
 # 1-site-N-wells (site-level layout design)
