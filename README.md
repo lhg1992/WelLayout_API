@@ -13,7 +13,7 @@ https://doi.org/10.1016/j.petrol.2021.109336
 
 Many improvements have been made over the original papers' work.
 
-Currently, this test server has very limited computing power, but it still just takes several seconds for a case.
+Currently, this test server has very limited computing power, but it still just takes several seconds for a case (except the anticollision case which takes around 4 minutes).
 
 =========================================================  
 __Run the \*.ipynb under /Demos/... to see the examples of using WelLayout API.__
