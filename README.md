@@ -3,7 +3,7 @@ This repository provides examples of using WelLayout API which provides the fiel
 Parametric trajectory design pattern let you say good-bye to manual trial-and-errors on the trajectory geometry to fulfill various constraints.
 
 
-The basic technical methods/ideas are created during my PhD work in NTNU-SUBPRO research team, and published in a series of 3 journal papers:  
+The basic technical methods/ideas were created during my PhD in NTNU-SUBPRO research team, and published in a series of 3 journal papers:  
 
 https://doi.org/10.1016/j.petrol.2021.109450
 
