@@ -242,7 +242,7 @@ def input2json (n, # number of wells
 
                 "slot":
                 {
-                    "DESCRIPTION": "available slot numbers in one cluster",
+                    "DESCRIPTION": "available slot numbers in one cluster, a descending list",
                     "UNIT":"",
                     "VALUE": slot
                 },

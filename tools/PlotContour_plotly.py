@@ -24,6 +24,9 @@ def PlotContour(X,Y,Contour_Val,
                 showscale=False, # True: show scale color bar
                 showlegend=True, # True: show legend
                 legendgroup=None, # legend group name
+                visible=True, # True: initially show the contour in the fig
+                            # "legendonly": show the contour in the legend only
+                            #    i.e., contour legend is shown, but turned off
 
                 cmin=None, cmax=None, # color scale min and max
 
@@ -135,6 +138,7 @@ def PlotContour(X,Y,Contour_Val,
             
             legendgroup=legendgroup,
             showlegend=showlegend,
+            visible=visible,
 
             hovertemplate= name + "<br>x: %{x:.2f}<br>y: %{y:.2f}<br>cost: %{intensity:.2f}<br><extra></extra>",
             hoverlabel=dict(

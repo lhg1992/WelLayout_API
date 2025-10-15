@@ -1100,7 +1100,9 @@
     ],
     "CostASite": null,
     "CostKSites": null,
-    "contours": null
+    "CostWells": null,
+    "Contours": null,
+    "AnticolReport": null
   },
   "message": "",
   "error_details": null
