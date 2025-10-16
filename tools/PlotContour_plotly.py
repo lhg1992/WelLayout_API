@@ -75,6 +75,8 @@ def PlotContour(X,Y,Contour_Val,
 
     # %% go.Surface
     # # bugs：can't show irregular shape；hovertemplate no effect
+    # # https://github.com/plotly/plotly.py/issues/5229
+    # # https://github.com/plotly/plotly.py/issues/5157
     # fig.add_trace( go.Surface(
     #     x=X.round(2), 
     #     y=Y.round(2), 

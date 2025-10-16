@@ -24,9 +24,9 @@ https://doi.org/10.1016/j.petrol.2021.109450
 https://doi.org/10.1016/j.petrol.2021.109273  
 https://doi.org/10.1016/j.petrol.2021.109336  
 
-Many improvements have been made over the single well trajectory design.  
+Many improvements have been made over orginal work.For example, the complex single well trajectory design (1-well):  
 Trajectory design with constraints (except anticollision):  
-https://doi.org/10.2118/216997-MS  
+https://doi.org/10.2118/216997-ms  
 
 Sidetrack trajectory design (to be updated in the API):  
 https://doi.org/10.2118/201021-ms  
