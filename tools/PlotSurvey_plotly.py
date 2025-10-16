@@ -2,7 +2,7 @@
 plot discretized trajectory.
 
 Input:
-survey: dict, solution dict of Dubins
+survey: dict or pandas DataFrame
 
 fig: fig handle for the plot
 

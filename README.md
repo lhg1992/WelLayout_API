@@ -1,9 +1,23 @@
 # WelLayout_API
 This repository provides examples of using WelLayout API which provides the field layout optimization under various constraints with extreme efficiency.
-Parametric trajectory design pattern let you say good-bye to manual trial-and-errors on the trajectory geometry to fulfill various constraints.
 
+This field layout optimization system API provides the following three functionalities:
+- Automatic field-level layout design (K-sites-N-wells)  
+- Automatic site-level layout design (1-site-N-wells)  
+- Automatic trajectory design (1-well)  
 
-The basic technical methods/ideas were created during my PhD in NTNU-SUBPRO research team, and published in a series of 3 journal papers:  
+It can manage a variety of constraints, including:
+- dogleg  
+- drill site location limit  
+- trajectory torquosity (e.g., turning angle control for torque & drag)  
+- dangerous zones in the formation  
+- anticollision with offset wells (only available for 1-well mode)
+
+Parametric design pattern let you say good-bye to manual trial-and-errors on the trajectory geometry and the whole field layout to fulfill various constraints.
+
+-----------------------------------------------------------
+
+The basic framework of this field layout optimization system was established during my PhD in NTNU-SUBPRO research team, and published in a series of 3 journal papers:  
 
 Subsea field layout optimization:  
 https://doi.org/10.1016/j.petrol.2021.109450  
@@ -14,7 +28,7 @@ Many improvements have been made over the single well trajectory design.
 Trajectory design with constraints (except anticollision):  
 https://doi.org/10.2118/216997-MS  
 
-Sidetrack trajectory design:  
+Sidetrack trajectory design (to be updated in the API):  
 https://doi.org/10.2118/201021-ms  
 
 Trajectory design with anticollision:  
@@ -47,4 +61,4 @@ Number of sites limited: /Demos/get_ksites/ksites_ex1.ipynb
 
 
 (To be continued ...)
-# You are welcome to contribute your case studies to this repository!
+# You are most welcome to contribute your case studies to this repository!

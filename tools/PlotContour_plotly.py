@@ -2,8 +2,8 @@
 plot cost contour(s)
 
 Input:
-X: (?,?), 2D array, X component of grid nodes location 
-Y: (?,?), 2D array, Y component of grid nodes location
+X: (?,?), 2D array or flattened 1D array, X component of grid nodes location 
+Y: (?,?), 2D array or flattened 1D array, Y component of grid nodes location
 Contour_Val: (?,?), 2D array, cost values at the nodes of one well
 Contour_ValM: (n, ?,?), 3D array, n wells' Contour_Val
 
