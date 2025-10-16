@@ -303,7 +303,7 @@ def PlotDangerArea(X,Y,Z,
    # format to Mesh3d
     mesh_data=surface2mesh3d(X, Y, Z, C=Z, dense=4)
 
-    # 创建 Mesh3d 图形
+    # Create Mesh3d figure
     fig.add_trace(go.Mesh3d(
             x=mesh_data['x'],
             y=mesh_data['y'],
@@ -312,7 +312,7 @@ def PlotDangerArea(X,Y,Z,
             j=mesh_data['j'],
             k=mesh_data['k'],
             name="danger zone",
-            color=Color, # 固定颜色
+            color=Color, # fixed color
             showlegend=True,
             opacity=0.8,
             hovertemplate= "danger zone" + "<br>x: %{x:.2f}<br>y: %{y:.2f}<br><extra></extra>", 
@@ -365,16 +365,16 @@ def surface2mesh3d(X, Y, Z, C=None, dense=1):
     if C is None:
         C = Z
 
-    if dense>1: #加密效果不好，最好不用
-        # 恢复原始x, y
+    if dense>1: #effect not good
+        # retrieve x, y
         x = np.unique(X)
         y = np.unique(Y)
 
-        # 加密
+        # densification
         x_dense = np.linspace(x.min(), x.max(), int(len(x)*dense))
         y_dense = np.linspace(y.min(), y.max(), int(len(y)*dense))
 
-        # 新网格
+        # densified grid
         X_dense, Y_dense = np.meshgrid(x_dense, y_dense)
 
         # valid = ~np.isnan(Z.flatten())
@@ -420,10 +420,10 @@ def surface2mesh3d(X, Y, Z, C=None, dense=1):
 
 
 
-    # 默认颜色使用 Z 值
+    # default color C=z
     intensity = C_Dense.ravel() if C_Dense is not None else z
 
-    # 构造三角形索引
+    # build triangle indices
     i, j, k = [], [], []
     for r in range(rows - 1):
         for c in range(cols - 1):
@@ -444,25 +444,25 @@ def surface2mesh3d(X, Y, Z, C=None, dense=1):
              |        |       |       |
             p2rc - - p2c - - p3c - - p3rc
             """
-            # 非np.nan个数
+            # number of real values in the 4 points
             count = np.count_nonzero(~np.isnan(z[[p0,p1,p2,p3]]))
             if count>=3:
-                # 注意3个点的顺逆时针顺序要统一，否则三角块颜色突兀
-                # 均采用顺时针
+                # clockwise or anticlockwise of the 3 points matters a lot!
+                # clockwise
                 if not np.isnan(z[p0]) and not np.isnan(z[p3]):
-                    # 以 0--3 为分割线
-                    # 构造两个三角形 (p0, p1, p3), (p0, p3, p2)
+                    # separated by 0--3 
+                    # two triangles: (p0, p1, p3), (p0, p3, p2)
                     i += [p0, p0]
                     j += [p1, p3]
                     k += [p3, p2]
                 else: 
-                    # 以 1--2 为分割线
-                    # 构造两个三角形 (p1, p3，p2), (p0, p1, p2)
+                    # separated 1--2 
+                    # two triangles: (p1, p3，p2), (p0, p1, p2)
                     i += [p1, p0]
                     j += [p3, p1]
                     k += [p2, p2]
             elif count == 2:
-                # 尝试拓展为钝角三角形？
+                # try Obtuse triangle？
                 pass
 
     return {
