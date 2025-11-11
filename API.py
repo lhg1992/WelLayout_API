@@ -3,9 +3,9 @@ import json
 import sys
 import os
 
-url_1well = "https://home-test.make234.com/api/v1/get_1well"
-url_1site = "https://home-test.make234.com/api/v1/get_1site"
-url_ksites = "https://home-test.make234.com/api/v1/get_ksites"
+url_1well = "http://52.230.1.154:8090/api/v1/get_1well"
+url_1site = "http://52.230.1.154:8090/api/v1/get_1site"
+url_ksites = "http://52.230.1.154:8090/api/v1/get_ksites"
 
 
 
@@ -14,8 +14,13 @@ url_ksites = "https://home-test.make234.com/api/v1/get_ksites"
 # =======================================================================
 # =======================================================================
 def get_1well(input_data, # formatted json data
-            index=None,
-            getContour=0,
+            index=0, # automatically computes the 1st well (index=0)
+            getContour=0, # whether to get the cost contour of the well
+            algorithm=1, # algorithm for 1well
+                        # 0:COBYLA; 1:SLSQP;
+                        # 10: multi-start parallel for COBYLA
+                        # 11: multi-start parallel for SLSQP
+            x0=None, # initial guess for 1well
 
             filepath='output.json', # filepath to save response content
             show=0, # show full response
@@ -27,6 +32,8 @@ def get_1well(input_data, # formatted json data
                 input_data, # formatted json data
                 index=index,
                 getContour=getContour,
+                algorithm=algorithm,
+                x0=x0,
 
                 filepath=filepath, # filepath to save response content
                 show=show, # show full response
@@ -37,7 +44,8 @@ def get_1well(input_data, # formatted json data
 # *********************************************************************
 def get_1site(input_data, # formatted json data
               indices=None, # indices of wells to be extracted from response
-              getContours=0,
+              getContours=1, # whether to get the cost contours of each well; 
+                            # cost contour of the site is always returned
               
             filepath='output.json', # filepath to save response content
             show=0, # show full response
@@ -59,7 +67,8 @@ def get_1site(input_data, # formatted json data
 # ***********************************************************************
 def get_ksites(input_data, # formatted json data
               indices=None, # indices of wells to be extracted from response
-              getContours=0,
+              getContours=1, # whether to get the cost contours of each well; 
+                            # cost contours of the sites are always returned
 
             filepath='output.json', # filepath to save response content
             show=0, # show full response
@@ -85,9 +94,17 @@ def get_ksites(input_data, # formatted json data
 # =======================================================================
 def APIhandler(url, # API server url
             input_data, # formatted json data
+
+            # get_1well parameters
             index=None, # index of well for 1well
             getContour=0, # whether to get the cost contour of the well
+            algorithm=11, # algorithm for 1well
+                        # 0:COBYLA; 1:SLSQP;
+                        # 10: multi-start parallel for COBYLA
+                        # 11: multi-start parallel for SLSQP
+            x0=None, # initial guess for 1well
 
+            # get_1site & ksites parameters
             indices=None, # indices of wells for 1site & ksites
             getContours=0, # whether to get the cost contours of each well
 
@@ -105,15 +122,12 @@ def APIhandler(url, # API server url
     try:
         # if the last word of url is "get_1well"
         if url.split("/")[-1]=="get_1well":
-            if index is None: # automatically computes the 1st well (index=0)
-                input_data["other"]={"getContour":getContour}
-                pass 
-            elif isinstance(index, int):
+            if isinstance(index, int):
                 if (index<0) or index>=input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']:
                     print(f"index out of range [0, {input_data['FIELDOPT INPUT BLOCK']['n']['VALUE']}]")
                     return None
                 # add parameters for computing the specified well
-                input_data["other"]={"index":index, "getContour":getContour}
+                input_data["other"]={"index":index, "getContour":getContour, "algorithm":algorithm, "x0":x0}
             else:
                 print("index must be an integer or unspecified(None)")
                 return None
@@ -177,7 +191,7 @@ def APIhandler(url, # API server url
         # return response content
         return json.loads(output)
     except requests.exceptions.Timeout:
-        print("Request timeout (exceeded 5 minutes)")
+        print(f"Request timeout (exceeded {timeout} seconds)")
     except requests.exceptions.RequestException as e:
         print("Request error:", e)
     except json.JSONDecodeError:

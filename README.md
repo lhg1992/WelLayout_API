@@ -24,7 +24,7 @@ https://doi.org/10.1016/j.petrol.2021.109450
 https://doi.org/10.1016/j.petrol.2021.109273  
 https://doi.org/10.1016/j.petrol.2021.109336  
 
-Many improvements have been made over orginal work.For example, the complex single well trajectory design (1-well):  
+Many improvements have been made over orginal work. For example, the complex single well trajectory design (1-well):  
 Trajectory design with constraints (except anticollision):  
 https://doi.org/10.2118/216997-ms  
 
@@ -37,8 +37,7 @@ Trajectory design with anticollision:
 Currently, this test server has very limited computing power, but it still just takes several seconds for a case (except the anticollision case which takes around 4 minutes).
 
 
-__Run the \*.ipynb under /Demos/... to see the examples of using WelLayout API.__
-================================================================
+# Run the *\*.ipynb under /Demos/...* to see the examples of using WelLayout API.
 
 Here shows some examples of the optimization results, **click the figures for interactive 3D visualization**.
 ## 1-well (Single well trajectory design)

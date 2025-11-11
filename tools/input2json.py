@@ -126,7 +126,7 @@ def input2json (n, # number of wells
                 "DLSM":
                 {
                     "DESCRIPTION": "dogleg severity",
-                    "UNIT":"°/30m",
+                    "UNIT":"deg/30m",
                     "VALUE":DLSM
                     # {
                     #     int(WellNo[i]): DLSM[i,:] for i in range(n)
