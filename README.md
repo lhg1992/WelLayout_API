@@ -24,7 +24,7 @@ https://doi.org/10.1016/j.petrol.2021.109450
 https://doi.org/10.1016/j.petrol.2021.109273  
 https://doi.org/10.1016/j.petrol.2021.109336  
 
-Many improvements have been made over orginal work. For example, the complex single well trajectory design (1-well):  
+Many improvements have been made over orginal work at CNPC R&D (DIFC) Company Limited. For example, the complex single well trajectory design (1-well):  
 Trajectory design with constraints (except anticollision):  
 https://doi.org/10.2118/216997-ms  
 
