@@ -3,9 +3,12 @@ import json
 import sys
 import os
 
-url_1well = "http://52.230.1.154:8090/api/v1/get_1well"
-url_1site = "http://52.230.1.154:8090/api/v1/get_1site"
-url_ksites = "http://52.230.1.154:8090/api/v1/get_ksites"
+# %% server IP
+# 52.230.1.154 # SEA sever, archaic
+server_ip = "35.212.147.170" # USA server
+url_1well = f"http://{server_ip}:8090/api/v1/get_1well"
+url_1site = f"http://{server_ip}:8090/api/v1/get_1site"
+url_ksites = f"http://{server_ip}:8090/api/v1/get_ksites"
 
 
 

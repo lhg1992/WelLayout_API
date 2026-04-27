@@ -14,7 +14,7 @@ def PlotArrow(start, vector, style='r-',
         start: shape (3,)
             Arrow starting point(s) [x0, y0, z0].
         vector: shape (3,)
-            Direction vector(s) [u, v, w].
+            Direction vector(s) [Vx, Vy, Vz].
         style: str
             e.g., 'k--', 'b:', 'r-'.
         fig: go.Figure or None
@@ -36,19 +36,25 @@ def PlotArrow(start, vector, style='r-',
         name = "Direction"
 
     x0, y0, z0 = start
-    u, v, w = vector
+    Vx, Vy, Vz = vector
 
     # Compute arrow endpoint
-    x1, y1, z1 = x0 + u, y0 + v, z0 + w
+    x1, y1, z1 = x0 + Vx, y0 + Vy, z0 + Vz
     
     line_style=style_map(style, shaft_width)
     # Arrow shaft (as a 3D line)
+    # define mouse hover interaction
+    hovertemplate_shaft = name + "<br>East: %{x:.2f}<br>North: %{y:.2f}<br>Depth: %{z:.2f}" + \
+        "<extra><br>Vx: %{customdata[0]:.2f}<br>Vy: %{customdata[1]:.2f}<br>Vz: %{customdata[2]:.2f}</extra>"
     fig.add_trace(go.Scatter3d(
         x=[x0, x1],
         y=[y0, y1],
         z=[z0, z1],
         mode='lines',
         line=line_style,
+
+        customdata= np.array([vector, vector]),# custom data for hover template
+        hovertemplate=hovertemplate_shaft,
 
         name=name,
         legendgroup=name,
@@ -61,23 +67,27 @@ def PlotArrow(start, vector, style='r-',
         return fig
 
     # Normalize direction
-    u_n, v_n, w_n = np.array([u, v, w]) / vec_len
+    vx, vy, vz = np.array([Vx, Vy, Vz]) / vec_len
 
     # Arrowhead (as a cone)
+    # define mouse hover interaction
+    hovertemplate_cone = name + "<br>East: %{x:.2f}<br>North: %{y:.2f}<br>Depth: %{z:.2f}" + \
+        "<extra><br>vx: %{u:.2f}<br>vy: %{v:.2f}<br>vz: %{w:.2f}</extra>"
     head_pos = np.array([x1, y1, z1])
     fig.add_trace(go.Cone(
         x=[head_pos[0]],
         y=[head_pos[1]],
         z=[head_pos[2]],
-        u=[u_n],
-        v=[v_n],
-        w=[w_n],
+        u=[vx],
+        v=[vy],
+        w=[vz],
         colorscale=[[0, line_style['color']], 
                     [1, line_style['color']]],
         sizemode="absolute",
         sizeref=vec_len * head_size,
         showscale=False,
 
+        hovertemplate=hovertemplate_cone,
         name=name,
         legendgroup=name,
         showlegend=True,
